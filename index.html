@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Human Archive (2126)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- AUDIO ELEMENTS -->
+    <audio id="sound-hum" src="hum.mp3" loop></audio>
+    <audio id="sound-heartbeat" src="heartbeat.mp3"></audio>
+    <audio id="sound-flash" src="flash.mp3"></audio>
+    <audio id="sound-mars-wind" src="mars_wind.mp3" loop></audio>
+    <audio id="sound-dust-storm" src="dust_storm.mp3"></audio>
+    <audio id="sound-rotor-damage" src="rotor_damage.mp3"></audio>
+
+    <div class="bg-overlay" id="main-bg"></div>
+    <div class="scanlines"></div>
+
+    <!-- CHAPTER 1: TERMINAL -->
+    <main class="terminal-container" id="chapter-1">
+        <header class="terminal-header">
+            <span class="status-dot"></span>
+            <span class="terminal-title">TERMINAL // EARTH ORBIT STATION // YEAR 2126</span>
+        </header>
+        <div class="terminal-body">
+            <div id="typewriter-text"></div>
+            <div id="mission-action" class="hidden">
+                <button id="accept-btn" class="pulse-btn">[ ACCEPT THE MISSION ]</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- CHAPTER 2: DASHBOARD / MAP -->
+    <main class="map-container hidden" id="chapter-2">
+        <div class="badge">🛡️ HUMAN-2126-ASSIGNED</div>
+        
+        <h1 class="map-title">THE HUMAN ARCHIVE</h1>
+        <h2 class="map-slogan">ABANDONED != FORGOTTEN</h2>[cite: 32]
+
+        <div class="cards-grid">
+            <div class="card active" id="moon-card">
+                <h3>MOON ARCHIVE</h3>
+                <p>[ 0/3 ]</p>
+            </div>
+            <div class="card locked" id="mars-card">
+                <h3>MARS ARCHIVE</h3>
+                <p>[ 0/4 ]</p>
+            </div>
+            <div class="card locked">
+                <h3>OTHER TRACES</h3>
+                <p>[ LOCKED ]</p>
+            </div>
+            <div class="card hidden-record locked">
+                <h3>HIDDEN RECORDS</h3>
+                <p>[ LOCKED ]</p>
+            </div>
+            <div class="card locked">
+                <h3>YOUR ARCHIVE</h3>
+                <p>[ LOCKED ]</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- MOON ARCHIVE MODAL -->
+    <div id="moon-modal" class="modal hidden">
+        <div class="modal-content">
+            <button id="close-moon-btn" class="close-btn">&times; CLOSE MAP</button>
+            <h2 class="section-title">MOON LOST OBJECT MAP</h2>
+            <p class="section-subtitle">PROGRESS: <span id="moon-progress">0/3</span> RECORDS</p>
+
+            <!-- RECORD 1: APOLLO 11 -->
+            <div class="record-box" id="record-1">
+                <h3>RECORD 1: UNIDENTIFIED OBJECT</h3>
+                <div class="clues-container">
+                    <button class="accordion">Clue 1: Mission Photo</button>
+                    <div class="panel"><p>📷 B&W frame, Astronauts, Flag on Moon surface.</p></div>
+                    <button class="accordion">Clue 2: Location Data</button>
+                    <div class="panel"><p>📍 Mare Tranquillitatis (0.67408 N, 23.47297 E)[cite: 32]</p></div>
+                    <button class="accordion">Clue 3: Mission Data</button>
+                    <div class="panel"><p>🚀 Apollo 11 (1969) - First crewed lunar landing[cite: 32].</p></div>
+                    <button class="accordion">Clue 4: Scientific Explanation</button>
+                    <div class="panel"><p>🔬 Descent stage stayed on the moon, ascent stage separated[cite: 32].</p></div>
+                </div>
+                <div id="rec1-result" class="hidden result-box">
+                    <h4>OBJECT IDENTIFIED: APOLLO 11 LUNAR MODULE DESCENT STAGE[cite: 32]</h4>
+                    <p><strong>NASA DATA:</strong> Mare Tranquillitatis | July 20, 1969 | Still on Lunar Surface[cite: 32]</p>
+                    <p class="story-text"><strong>STORY:</strong> Insan chand par pohnche. Mission ka ek hissa jan boojh kar piche chhora gaya kyunki sab wapis laane nahi gaye the[cite: 32].</p>
+                </div>
+            </div>
+
+            <!-- RECORD 2: LASER RETROREFLECTORS -->
+            <div class="record-box locked-rec" id="record-2">
+                <h3>RECORD 2: SCIENTIFIC INSTRUMENT</h3>
+                <p>Earth-Moon distance measurement tool[cite: 33].</p>
+                <button id="sim-btn" class="pulse-btn">[ START SIMULATION ]</button>
+                <div id="sim-canvas" class="hidden">
+                    <div class="laser-beam"></div>
+                    <p class="sim-text">AVERAGE EARTH-MOON DISTANCE: ~384,400 km[cite: 33]</p>
+                    <p class="story-text"><strong>NASA DATA:</strong> Apollo 11, 14, 15 ke laser retroreflectors aaj bhi scientists measurements ke liye use karte hain[cite: 33].</p>
+                </div>
+            </div>
+
+            <!-- RECORD 3: FALLEN ASTRONAUT -->
+            <div class="record-box locked-rec" id="record-3">
+                <h3>RECORD 3: MEMORIAL PLAQUE & FIGURE</h3>
+                <p>Hadley Rille (Apollo 15, 1971) - Dedicated to 14 fallen astronauts & cosmonauts[cite: 33].</p>
+                <p class="question">Sawal: Insan kisi aur duniya par monuments kyun chhortay hain?</p>
+                <div class="choice-btns">
+                    <button class="choice-btn" onclick="makeChoice('REMEMBER')">[ REMEMBER ]</button>
+                    <button class="choice-btn" onclick="makeChoice('WARN')">[ WARN ]</button>
+                    <button class="choice-btn" onclick="makeChoice('CELEBRATE')">[ CELEBRATE ]</button>
+                </div>
+                <div id="choice-result" class="hidden story-text">
+                    <p id="choice-msg"></p>
+                    <p><strong>STORY:</strong> Insan duniya piche chhor sakte hain par yadein nahi chhortay[cite: 33].</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARS ARCHIVE MODAL -->
+    <div id="mars-modal" class="modal hidden">
+        <div class="modal-content mars-theme">
+            <button id="close-mars-btn" class="close-btn">&times; CLOSE MAP</button>
+            <h2 class="section-title">MARS LOST OBJECT MAP</h2>
+            <p class="section-subtitle" style="color:#ff4444;">PROGRESS: <span id="mars-progress">0/4</span> RECORDS</p>
+
+            <!-- RECORD 4: PATHFINDER -->
+            <div class="record-box" id="record-4">
+                <h3>RECORD 4: THE FIRST ROVER[cite: 33]</h3>
+                <p>Ek pahiye wala chhota vehicle jiske tracks mitti mein hain[cite: 33].</p>
+                <button class="pulse-btn mars-btn" id="btn-pathfinder">[ FOLLOW TRACKS ]</button>
+                <div id="res-pathfinder" class="hidden result-box mars-result">
+                    <h4>OBJECT IDENTIFIED: MARS PATHFINDER[cite: 33]</h4>
+                    <p><strong>NASA DATA:</strong> July 4, 1997 | Operation: 83 sols[cite: 33].</p>
+                    <p class="story-text" style="color:#ff8888;"><strong>STORY:</strong> Ye un pehle rovers mein tha jo dusri duniya ki satah par chale[cite: 33].</p>
+                </div>
+            </div>
+
+            <!-- RECORD 5: MER-A -->
+            <div class="record-box locked-rec" id="record-5">
+                <h3>RECORD 5: SIX YEARS[cite: 33]</h3>
+                <p>Ek rover jiska pahiya locked hai[cite: 33].</p>
+                <button class="pulse-btn mars-btn" id="btn-mera">[ INVESTIGATE ]</button>
+                <div id="res-mera" class="hidden result-box mars-result">
+                    <h4>OBJECT IDENTIFIED: MARS EXPLORATION ROVER A[cite: 33]</h4>
+                    <p><strong>NASA DATA:</strong> Planned 90 sols, Actual 2,210 sols. Distance: ~7.73 km[cite: 33].</p>
+                    <p class="story-text" style="color:#ff8888;"><strong>STORY:</strong> Ye 90 din ke liye design tha, par 6 saal chala[cite: 33].</p>
+                </div>
+            </div>
+
+            <!-- RECORD 6: OPPORTUNITY -->
+            <div class="record-box locked-rec" id="record-6">
+                <h3>RECORD 6: THE HEART OF THE STORY[cite: 33]</h3>
+                <p>Meridiani Planum (OPPORTUNITY)[cite: 33].</p>
+                <div class="timeline">
+                    <button class="time-btn" data-year="2004">2004</button>
+                    <button class="time-btn" data-year="2005">2005</button>
+                    <button class="time-btn" data-year="2007">2007</button>
+                    <button class="time-btn" data-year="2014">2014</button>
+                    <button class="time-btn time-danger" data-year="2018">2018</button>
+                </div>
+                <div id="res-oppy" class="hidden result-box mars-result">
+                    <h4 id="oppy-status" style="color: red;"></h4>
+                    <p id="oppy-data" class="hidden"><strong>NASA DATA:</strong> Planned 90 sols. Actual 5,498 sols. Distance: 45.16 km[cite: 33, 34].</p>
+                    <p id="oppy-story" class="hidden story-text" style="color:#ff8888;"><strong>STORY:</strong> Phir ye khamosh ho gaya. ABANDONED != FORGOTTEN[cite: 32, 33].</p>
+                </div>
+            </div>
+
+            <!-- RECORD 7: INGENUITY -->
+            <div class="record-box locked-rec" id="record-7">
+                <h3>RECORD 7: FLIGHT (INGENUITY)[cite: 34]</h3>
+                <p>Chhota helicopter, Jezero Crater. Slider ko aage barhayen[cite: 34].</p>
+                <p style="font-weight:bold; color:#ff4444;">Flights Completed: <span id="flight-count">1</span></p>
+                <input type="range" id="flight-slider" min="1" max="72" value="1" class="slider">
+                <div id="res-ingenuity" class="hidden result-box mars-result">
+                    <h4>OBJECT IDENTIFIED: INGENUITY HELICOPTER[cite: 34]</h4>
+                    <p><strong>NASA DATA:</strong> Planned 5 flights. Completed 72 flights. Last: Jan 25, 2024[cite: 34].</p>
+                    <p class="story-text" style="color:#ff8888;"><strong>STORY:</strong> Ingenuity ne piche data aur future ke liye rasta chhora[cite: 34].</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
